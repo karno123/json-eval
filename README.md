@@ -1,7 +1,7 @@
 # JSON EVAL 
 JSON EVAL is simple json evaluator that may be simplify business rule. 
 
-# Operator 
+## Operator 
 Operator supported 
 | No.      | Operator  | Precedence |
 | ---      | ---       | ---
@@ -14,7 +14,7 @@ Operator supported
 | 6        | &&        | 3 (left to right)
 | 7        | \|\|      | 4 (left to right)
 
-# Evaluate
+## Evaluate
 json-eval can evaluate json value with logical expression.
 
 We have below json:
@@ -52,7 +52,7 @@ expression:
 ~~~
 glossary.title == "example glossary" && glossary.total > 100
 ~~~
-# Array of Index
+## Array of Index
 json eval also has capability to extract array value from json. for example, 
 ~~~
 glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso[0]
@@ -63,7 +63,7 @@ Result:
 "GML"
 ```
 
-# Example
+## Example
 Code snippets
 ```go
 jsnStr := `
