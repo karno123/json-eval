@@ -1,5 +1,5 @@
-# MAP EVAL 
-Map eval is simple map evaluator that may be simplify business rule. 
+# JSON EVAL 
+JSON EVAL is simple json evaluator that may be simplify business rule. 
 
 ##Operator 
 * >
