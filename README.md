@@ -64,8 +64,19 @@ GML
 # Example
 Code snippest
 ```go
+jsnStr := `
+    {
+        "glossary": {
+            "title": "example glossary",
+            "GlossDiv": {
+                "total": 1000
+            }
+        }
+    }    
+`
+expression := `glossary.title == "example glossary" && glossary.total > 100`
 mapEval := jsoneval.NewJsonEvaluator()
-result, err := mapEval.Evaluate(expression, x)
+result, err := mapEval.EvaluateJson(expression, jsonStr)
 if err != nil {
   fmt.Println(err)
 } else {
