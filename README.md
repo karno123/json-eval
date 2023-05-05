@@ -13,6 +13,7 @@ Operator supported
 | 6.       | ==        | 2 (left to right)  
 | 6        | &&        | 3 (left to right)
 | 7        | \|\|      | 4 (left to right)
+| 8        | ()        |
 
 ## Evaluate
 json-eval can evaluate json value with logical expression.
@@ -76,7 +77,7 @@ jsnStr := `
         }
     }    
 `
-expression := `glossary.title == "example glossary" && glossary.total > 100`
+expression := `glossary.title == "example glossary" && (glossary.total > 100)`
 mapEval := jsoneval.NewJsonEvaluator()
 result, err := mapEval.EvaluateJson(expression, jsonStr)
 if err != nil {
