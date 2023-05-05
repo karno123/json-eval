@@ -58,7 +58,7 @@ glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso[0]
 
 Result:
 ```go 
-GML
+"GML"
 ```
 
 # Example
