@@ -47,8 +47,8 @@ We have below json:
 }
 ```
 expression: 
-```json
-glossary.title == "example glossary" && glossary.total > 100
-```
+
+=== glossary.title == "example glossary" && glossary.total > 100 ===
+
 
 
