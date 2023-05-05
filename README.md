@@ -52,7 +52,8 @@ expression:
 ~~~
 glossary.title == "example glossary" && glossary.total > 100
 ~~~
-array of index, json eval also has capability to extract array value from json. for example, 
+# Array of Index
+json eval also has capability to extract array value from json. for example, 
 ~~~
 glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso[0]
 ~~~
@@ -63,7 +64,7 @@ Result:
 ```
 
 # Example
-Code snippest
+Code snippets
 ```go
 jsnStr := `
     {
