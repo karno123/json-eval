@@ -93,6 +93,10 @@ func (n MapExtractor) GetValueKeys(keys []string, keyOri string, param map[strin
 			return nil, fmt.Errorf("incompatible type, arr value key %s is not map", keyOri)
 		}
 	} else {
+		if param[keyStr] == nil {
+			return nil, fmt.Errorf("no value found for key: %s", keyOri)
+		}
+
 		if reflect.TypeOf(param[keyStr]).Kind() != reflect.Map {
 			return nil, fmt.Errorf("incompatible type, arr value key %s is not map", keyOri)
 		}

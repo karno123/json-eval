@@ -23,7 +23,11 @@ func (t Tokenizer) Tokenize(expression string) ([]Token, error) {
 	for i := 0; i < len(expRunes); i++ {
 		if expRunes[i] == '>' {
 			if len(token.Value) > 0 {
-				tokens = append(tokens, token)
+				tokenArr, err := t.SanitizeAndAppend(tokens, token)
+				tokens = tokenArr
+				if err != nil {
+					return nil, errors.New("invalid syntax")
+				}
 				token = Token{}
 			}
 
@@ -35,7 +39,11 @@ func (t Tokenizer) Tokenize(expression string) ([]Token, error) {
 			tokens = append(tokens, Token{">"})
 		} else if expRunes[i] == '<' {
 			if len(token.Value) > 0 {
-				tokens = append(tokens, token)
+				tokenArr, err := t.SanitizeAndAppend(tokens, token)
+				tokens = tokenArr
+				if err != nil {
+					return nil, errors.New("invalid syntax")
+				}
 				token = Token{}
 			}
 
@@ -48,7 +56,11 @@ func (t Tokenizer) Tokenize(expression string) ([]Token, error) {
 		} else if expRunes[i] == '=' {
 
 			if len(token.Value) > 0 {
-				tokens = append(tokens, token)
+				tokenArr, err := t.SanitizeAndAppend(tokens, token)
+				tokens = tokenArr
+				if err != nil {
+					return nil, errors.New("invalid syntax")
+				}
 				token = Token{}
 			}
 
@@ -61,7 +73,11 @@ func (t Tokenizer) Tokenize(expression string) ([]Token, error) {
 		} else if expRunes[i] == '&' {
 
 			if len(token.Value) > 0 {
-				tokens = append(tokens, token)
+				tokenArr, err := t.SanitizeAndAppend(tokens, token)
+				tokens = tokenArr
+				if err != nil {
+					return nil, errors.New("invalid syntax")
+				}
 				token = Token{}
 			}
 
@@ -74,7 +90,11 @@ func (t Tokenizer) Tokenize(expression string) ([]Token, error) {
 		} else if expRunes[i] == '|' {
 
 			if len(token.Value) > 0 {
-				tokens = append(tokens, token)
+				tokenArr, err := t.SanitizeAndAppend(tokens, token)
+				tokens = tokenArr
+				if err != nil {
+					return nil, errors.New("invalid syntax")
+				}
 				token = Token{}
 			}
 
@@ -84,12 +104,14 @@ func (t Tokenizer) Tokenize(expression string) ([]Token, error) {
 				continue
 			}
 			return nil, errors.New("invalid operator ||")
-		} else if expRunes[i] == ' ' {
-			continue
 		} else if expRunes[i] == '(' {
 
 			if len(token.Value) > 0 {
-				tokens = append(tokens, token)
+				tokenArr, err := t.SanitizeAndAppend(tokens, token)
+				tokens = tokenArr
+				if err != nil {
+					return nil, errors.New("invalid syntax")
+				}
 				token = Token{}
 			}
 
@@ -98,7 +120,11 @@ func (t Tokenizer) Tokenize(expression string) ([]Token, error) {
 		} else if expRunes[i] == ')' {
 
 			if len(token.Value) > 0 {
-				tokens = append(tokens, token)
+				tokenArr, err := t.SanitizeAndAppend(tokens, token)
+				tokens = tokenArr
+				if err != nil {
+					return nil, errors.New("invalid syntax")
+				}
 				token = Token{}
 			}
 
@@ -106,7 +132,11 @@ func (t Tokenizer) Tokenize(expression string) ([]Token, error) {
 			continue
 		} else if expRunes[i] == '!' {
 			if len(token.Value) > 0 {
-				tokens = append(tokens, token)
+				tokenArr, err := t.SanitizeAndAppend(tokens, token)
+				tokens = tokenArr
+				if err != nil {
+					return nil, errors.New("invalid syntax")
+				}
 				token = Token{}
 			}
 
@@ -121,10 +151,47 @@ func (t Tokenizer) Tokenize(expression string) ([]Token, error) {
 	}
 
 	if len(token.Value) > 0 {
-		tokens = append(tokens, token)
+		tokenArr, err := t.SanitizeAndAppend(tokens, token)
+		tokens = tokenArr
+		if err != nil {
+			return nil, errors.New("invalid syntax")
+		}
 		token = Token{}
 	}
 
+	return tokens, nil
+}
+
+//remove space from start and end
+func (t Tokenizer) SanitizeAndAppend(tokens []Token, newToken Token) ([]Token, error) {
+	if len(newToken.Value) <= 0 {
+		return nil, errors.New("invalid token")
+	}
+
+	tokenValueRunes := []rune(newToken.Value)
+	i := 0
+	for i < len(tokenValueRunes) && tokenValueRunes[i] == ' ' {
+		i++
+	}
+
+	tokenValueRunes = tokenValueRunes[i:]
+	if len(tokenValueRunes) <= 0 {
+		return tokens, nil
+	}
+
+	i = len(tokenValueRunes) - 1
+	for tokenValueRunes[i] == ' ' && i > 0 {
+		i--
+	}
+
+	tokenValueRunes = tokenValueRunes[0 : i+1]
+	if len(tokenValueRunes) <= 0 {
+		return tokens, nil
+	}
+
+	tokenVal := string(tokenValueRunes)
+
+	tokens = append(tokens, Token{tokenVal})
 	return tokens, nil
 }
 

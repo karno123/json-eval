@@ -126,4 +126,23 @@ func main() {
 	}
 
 	fmt.Println(time.Now().UnixMilli() - currTime)
+
+	jsonStr = `
+    {
+        "glossary": {
+            "title": "example glossary",
+            "GlossDiv": {
+                "total": 1000
+            }
+        }
+    }    
+`
+	expression = `glossary.title == "example glossary" && ( glossary.GlossDiv.total > 100  )    `
+	jsonEval := jsoneval.NewJsonEvaluator()
+	result, err = jsonEval.EvaluateJson(expression, jsonStr)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(result)
+	}
 }
