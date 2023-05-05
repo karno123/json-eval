@@ -52,4 +52,20 @@ expression:
 glossary.title == "example glossary" && glossary.total > 100
 ~~~
 
+#Example
+```go
+mapEval := jsoneval.NewJsonEvaluator()
+result, err := mapEval.Evaluate(expression, x)
+if err != nil {
+  fmt.Println(err)
+} else {
+  fmt.Println(result)
+}
+```
+
+Result:
+```go 
+true 
+```
+
 
