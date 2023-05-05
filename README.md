@@ -3,15 +3,16 @@ JSON EVAL is simple json evaluator that may be simplify business rule.
 
 # Operator 
 Operator supported 
-| No.      | Operator  |
-| ---      | ---       |
-| 1        | <         |
-| 2        | <=        |
-| 3        | >         |
-| 4        | >=        |
-| 5        | !=        |
-| 6        | \|\|      |
-| 7        | &&        |
+| No.      | Operator  | Precedence |
+| ---      | ---       | ---
+| 1        | <         | 1 (left to right)
+| 2        | <=        | 1 (left to right)
+| 3        | >         | 1 (left to right)
+| 4        | >=        | 1 (left to right)
+| 5        | !=        | 2 (left to right)
+| 6.       | ==        | 2 (left to right)  
+| 6        | &&        | 3 (left to right)
+| 7        | \|\|      | 4 (left to right)
 
 # Evaluate
 json-eval can evaluate json value with logical expression.
