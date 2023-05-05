@@ -1,7 +1,7 @@
 # JSON EVAL 
 JSON EVAL is simple json evaluator that may be simplify business rule. 
 
-# Operator 
+## Operator 
 Operator supported 
 | No.      | Operator  | Precedence |
 | ---      | ---       | ---
@@ -13,8 +13,9 @@ Operator supported
 | 6.       | ==        | 2 (left to right)  
 | 6        | &&        | 3 (left to right)
 | 7        | \|\|      | 4 (left to right)
+| 8        | ()        |
 
-# Evaluate
+## Evaluate
 json-eval can evaluate json value with logical expression.
 
 We have below json:
@@ -52,7 +53,8 @@ expression:
 ~~~
 glossary.title == "example glossary" && glossary.total > 100
 ~~~
-array of index, json eval also has capability to extract array value from json. for example, 
+## Array of Index
+json eval also has capability to extract array value from json. for example, 
 ~~~
 glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso[0]
 ~~~
@@ -62,26 +64,26 @@ Result:
 "GML"
 ```
 
-# Example
-Code snippest
+## Example
+Code snippets
 ```go
-jsnStr := `
+jsonStr := `
     {
         "glossary": {
-            "title": "example glossary",
+            "title": "example",
             "GlossDiv": {
                 "total": 1000
             }
         }
     }    
 `
-expression := `glossary.title == "example glossary" && glossary.total > 100`
-mapEval := jsoneval.NewJsonEvaluator()
-result, err := mapEval.EvaluateJson(expression, jsonStr)
+expression := `glossary.title == "example" && glossary.GlossDiv.total > 100`
+jsonEval := jsoneval.NewJsonEvaluator()
+result, err := jsonEval.EvaluateJson(expression, jsonStr)
 if err != nil {
-  fmt.Println(err)
+    fmt.Println(err)
 } else {
-  fmt.Println(result)
+    fmt.Println(result)
 }
 ```
 
