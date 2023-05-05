@@ -77,7 +77,7 @@ jsonStr := `
         }
     }    
 `
-expression := `glossary.title == "example" && glossary.GlossDiv.total > 100`
+expression := `glossary.title == "example" && (glossary.GlossDiv.total > 100)`
 jsonEval := jsoneval.NewJsonEvaluator()
 result, err := jsonEval.EvaluateJson(expression, jsonStr)
 if err != nil {
