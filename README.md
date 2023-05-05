@@ -67,23 +67,23 @@ Result:
 ## Example
 Code snippets
 ```go
-jsnStr := `
+jsonStr := `
     {
         "glossary": {
-            "title": "example glossary",
+            "title": "example",
             "GlossDiv": {
                 "total": 1000
             }
         }
     }    
 `
-expression := `glossary.title == "example glossary" && (glossary.GlossDiv.total > 100)`
-mapEval := jsoneval.NewJsonEvaluator()
-result, err := mapEval.EvaluateJson(expression, jsonStr)
+expression := `glossary.title == "example" && glossary.GlossDiv.total > 100`
+jsonEval := jsoneval.NewJsonEvaluator()
+result, err := jsonEval.EvaluateJson(expression, jsonStr)
 if err != nil {
-  fmt.Println(err)
+    fmt.Println(err)
 } else {
-  fmt.Println(result)
+	fmt.Println(result)
 }
 ```
 
